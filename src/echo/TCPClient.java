@@ -4,10 +4,17 @@ import java.io.*;
 import java.net.*;
 import java.util.Scanner;
 
+/**
+ *  TCP协议是传输层协议
+ *  有连接
+ *  可靠传输
+ *  面向字节流
+ */
 public class TCPClient {
     public static void main(String[] args) throws IOException {
         Scanner scanner = new Scanner(System.in);
         Socket tcpClientSocket = new Socket();
+
         byte[]ipv4 = {(byte)10, (byte)188, (byte)35, (byte)78};
         InetAddress serverAddress = InetAddress.getByAddress(ipv4);
         SocketAddress serberSocketAddress = new InetSocketAddress(

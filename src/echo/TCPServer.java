@@ -4,13 +4,13 @@ import java.io.*;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.net.SocketAddress;
 import java.util.Scanner;
 import java.util.concurrent.*;
 
 public class TCPServer {
 
     private static class TalkRunnable implements Runnable {
+        //侦听要连接到此套接字并接受它
         private Socket clientSocket;
 
         TalkRunnable(Socket socket) {
@@ -20,6 +20,7 @@ public class TCPServer {
         @Override
         public void run() {
             try {
+                //返回此套接字所连接的地址
                 InetAddress clientAddress = clientSocket.getInetAddress();
                 int clientPort = clientSocket.getPort();
                 System.out.printf("有客户端连接上来 %s:%d%n",
@@ -56,6 +57,7 @@ public class TCPServer {
     }
 
     public static void main(String[] args) throws IOException {
+        //创建绑定到指定端口的服务器套接字
         ServerSocket tcpServerSocket = new ServerSocket(20201);
         BlockingQueue<Runnable> queue = new LinkedBlockingQueue<>();
         ExecutorService pool = new ThreadPoolExecutor(
